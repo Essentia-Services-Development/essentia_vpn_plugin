@@ -4,17 +4,17 @@
 #[derive(Debug, Clone)]
 pub struct VpnServer {
     /// Server identifier.
-    pub id: String,
+    pub id:          String,
     /// Server hostname or IP.
-    pub hostname: String,
+    pub hostname:    String,
     /// Server port.
-    pub port: u16,
+    pub port:        u16,
     /// Server country code.
-    pub country: String,
+    pub country:     String,
     /// Server city.
-    pub city: String,
+    pub city:        String,
     /// Server load (0.0 - 1.0).
-    pub load: f32,
+    pub load:        f32,
     /// Supports PQC.
     pub pqc_enabled: bool,
 }
@@ -23,17 +23,17 @@ pub struct VpnServer {
 #[derive(Debug, Clone)]
 pub struct VpnTunnel {
     /// Tunnel identifier.
-    pub id: u64,
+    pub id:           u64,
     /// Connected server.
-    pub server: VpnServer,
+    pub server:       VpnServer,
     /// Tunnel state.
-    pub state: TunnelState,
+    pub state:        TunnelState,
     /// Encryption algorithm.
-    pub encryption: EncryptionAlgorithm,
+    pub encryption:   EncryptionAlgorithm,
     /// Key exchange protocol.
     pub key_exchange: KeyExchangeProtocol,
     /// Connection statistics.
-    pub stats: ConnectionStats,
+    pub stats:        ConnectionStats,
 }
 
 /// Tunnel state.
@@ -53,15 +53,15 @@ pub enum TunnelState {
 #[derive(Debug, Clone, Default)]
 pub struct ConnectionStats {
     /// Bytes sent.
-    pub bytes_sent: u64,
+    pub bytes_sent:     u64,
     /// Bytes received.
     pub bytes_received: u64,
     /// Connection uptime (seconds).
-    pub uptime_secs: u64,
+    pub uptime_secs:    u64,
     /// Current latency (ms).
-    pub latency_ms: u32,
+    pub latency_ms:     u32,
     /// Packets lost (percentage).
-    pub packet_loss: f32,
+    pub packet_loss:    f32,
 }
 
 /// Encryption algorithm.

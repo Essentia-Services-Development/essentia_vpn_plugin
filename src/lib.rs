@@ -29,24 +29,23 @@
 //! └─────────────────────────────────────────────────────────────┘
 //! ```
 
-mod types;
-mod errors;
 mod config;
+mod errors;
 mod key_exchange;
-mod tunnel;
-mod router;
 mod plugin;
+mod router;
+mod tunnel;
+mod types;
 
-pub use types::{
-    VpnServer, VpnTunnel, TunnelState, ConnectionStats,
-    EncryptionAlgorithm, KeyExchangeProtocol,
-};
-pub use errors::{VpnError, VpnResult};
 pub use config::VpnConfig;
+pub use errors::{VpnError, VpnResult};
 pub use key_exchange::PqcKeyExchange;
-pub use tunnel::TunnelManager;
-pub use router::NeuralRouter;
 pub use plugin::VpnPlugin;
+pub use router::NeuralRouter;
+pub use tunnel::TunnelManager;
+pub use types::{
+    ConnectionStats, EncryptionAlgorithm, KeyExchangeProtocol, TunnelState, VpnServer, VpnTunnel,
+};
 
 #[cfg(test)]
 mod tests {

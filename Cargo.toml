@@ -6,6 +6,7 @@ authors = ["Essentia Services Development <dev@essentia.services>"]
 description = "Quantum-safe neural tunnels with PQC encryption"
 license = "MIT"
 repository = "https://github.com/Essentia-Services-Development/essentia_vpn_plugin"
+readme = "README.md"
 keywords = ["essentia", "vpn", "pqc", "security", "plugin"]
 categories = ["cryptography", "network-programming"]
 
