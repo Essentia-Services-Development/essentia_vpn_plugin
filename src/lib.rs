@@ -10,6 +10,17 @@
 //! - Multi-hop tunnel support
 //! - Kill switch and leak protection
 //!
+//! ## FlexForge Integration
+//!
+//! The VPN plugin integrates with FlexForge via `VpnPluginFlexForge`:
+//!
+//! ```ignore
+//! use essentia_vpn_plugin::flexforge::VpnPluginFlexForge;
+//!
+//! let plugin = VpnPluginFlexForge::new();
+//! let panel_info = plugin.panel_info();
+//! ```
+//!
 //! ## Architecture
 //!
 //! ```text
@@ -31,6 +42,7 @@
 
 mod config;
 mod errors;
+pub mod flexforge;
 mod key_exchange;
 mod plugin;
 mod router;
@@ -39,6 +51,7 @@ mod types;
 
 pub use config::VpnConfig;
 pub use errors::{VpnError, VpnResult};
+pub use flexforge::{ConnectionState, VpnPluginFlexForge, VpnUiConfig};
 pub use key_exchange::PqcKeyExchange;
 pub use plugin::VpnPlugin;
 pub use router::NeuralRouter;
