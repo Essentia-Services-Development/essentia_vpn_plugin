@@ -60,7 +60,9 @@ pub enum ConnectionState {
 }
 
 impl ConnectionState {
-    fn as_str(&self) -> &'static str {
+    /// Convert state to string representation
+    #[must_use]
+    pub fn as_str(&self) -> &'static str {
         match self {
             Self::Disconnected => "disconnected",
             Self::Connecting => "connecting",
@@ -171,10 +173,10 @@ impl FlexForgeIntegration for VpnPluginFlexForge {
     }
 
     fn on_panel_deactivate(&mut self) {
-        if self.stream_active {
-            if let Some(id) = self.stream_id {
-                let _ = self.stop_stream(id);
-            }
+        if self.stream_active
+            && let Some(id) = self.stream_id
+        {
+            let _ = self.stop_stream(id);
         }
     }
 
