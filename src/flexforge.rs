@@ -362,7 +362,7 @@ impl StreamingCapable for VpnPluginFlexForge {
         }
 
         // Emit status frame with connection state, bandwidth, etc.
-        // In production, this would serialize to RSP+++ status frame
+        // In production, this would serialize to ERSP status frame
         true
     }
 }
