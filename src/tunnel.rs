@@ -20,7 +20,7 @@ impl TunnelManager {
     /// Create a tunnel to server.
     pub fn create_tunnel(&mut self, server: VpnServer) -> VpnResult<u64> {
         if self.active_tunnel.is_some() {
-            return Err(VpnError::Tunnel("Tunnel already active".into()));
+            return Err(VpnError::Tunnel("Tunnel already active";
         }
 
         let id = self.next_tunnel_id;
@@ -72,3 +72,4 @@ impl Default for TunnelManager {
         Self::new()
     }
 }
+
