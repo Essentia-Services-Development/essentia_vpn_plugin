@@ -16,7 +16,7 @@ essentia_core = { workspace = true }
 essentia_traits = { workspace = true }
 essentia_plugin_system = { workspace = true }
 essentia_pqc = { workspace = true }
-essentia_net_plugin = { workspace = true }
+essentia_devops_net_plugin = { workspace = true }
 
 [dev-dependencies]
 
