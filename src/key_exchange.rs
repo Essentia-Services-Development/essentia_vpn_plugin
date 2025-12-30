@@ -35,7 +35,7 @@ impl PqcKeyExchange {
     /// Perform key encapsulation (client side).
     pub fn encapsulate(&mut self, server_public_key: &[u8]) -> VpnResult<(Vec<u8>, Vec<u8>)> {
         if server_public_key.is_empty() {
-            return Err(VpnError::KeyExchange("Empty server public key";
+            return Err(VpnError::KeyExchange("Empty server public key".to_string()));
         }
 
         // In production, uses ML-KEM encapsulation
@@ -49,7 +49,7 @@ impl PqcKeyExchange {
     /// Perform key decapsulation (server side).
     pub fn decapsulate(&mut self, ciphertext: &[u8]) -> VpnResult<Vec<u8>> {
         if ciphertext.is_empty() {
-            return Err(VpnError::KeyExchange("Empty ciphertext";
+            return Err(VpnError::KeyExchange("Empty ciphertext".to_string()));
         }
 
         // In production, uses ML-KEM decapsulation
@@ -81,4 +81,3 @@ impl Drop for PqcKeyExchange {
         self.clear();
     }
 }
-

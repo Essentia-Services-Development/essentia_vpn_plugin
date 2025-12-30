@@ -1,5 +1,7 @@
 //! VPN plugin type definitions.
 
+use std::rc::Rc;
+
 /// VPN server representation.
 #[derive(Debug, Clone)]
 pub struct VpnServer {

@@ -399,13 +399,15 @@ mod tests {
     fn test_streaming() {
         let mut plugin = VpnPluginFlexForge::new();
 
-        let stream_id = plugin.start_stream().ok_or_else(|| EssentiaError::invalid_state("Should start");
+        let stream_id = plugin
+            .start_stream()
+            .ok_or_else(|| EssentiaError::invalid_state("Should start"))?;
         assert!(plugin.is_streaming());
         assert_eq!(plugin.target_fps(), 5);
 
-        plugin.stop_stream(stream_id).ok_or_else(|| EssentiaError::invalid_state("Should stop");
+        plugin
+            .stop_stream(stream_id)
+            .ok_or_else(|| EssentiaError::invalid_state("Should stop"))?;
         assert!(!plugin.is_streaming());
     }
 }
-
-

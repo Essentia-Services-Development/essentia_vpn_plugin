@@ -1,5 +1,7 @@
 //! Tunnel management.
 
+use std::rc::Rc;
+
 use crate::{
     errors::{VpnError, VpnResult},
     types::{ConnectionStats, TunnelState, VpnServer, VpnTunnel},
@@ -18,9 +20,9 @@ impl TunnelManager {
     }
 
     /// Create a tunnel to server.
-    pub fn create_tunnel(&mut self, server: VpnServer) -> VpnResult<u64> {
+    pub fn create_tunnel(&mut self, server: Rc<VpnServer>) -> VpnResult<u64> {
         if self.active_tunnel.is_some() {
-            return Err(VpnError::Tunnel("Tunnel already active";
+            return Err(VpnError::Tunnel("Tunnel already active".to_string()));
         }
 
         let id = self.next_tunnel_id;
@@ -72,4 +74,3 @@ impl Default for TunnelManager {
         Self::new()
     }
 }
-

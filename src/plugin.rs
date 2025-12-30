@@ -1,5 +1,7 @@
 //! VPN plugin implementation.
 
+use std::rc::Rc;
+
 use crate::{
     config::VpnConfig,
     errors::{VpnError, VpnResult},
@@ -46,9 +48,9 @@ impl VpnPlugin {
     }
 
     /// Connect to a specific server.
-    pub fn connect(&mut self, server: VpnServer) -> VpnResult<()> {
+    pub fn connect(&mut self, server: Rc<VpnServer>) -> VpnResult<()> {
         if self.is_connected() {
-            return Err(VpnError::Connection("Already connected";
+            return Err(VpnError::Connection("Already connected".to_string()));
         }
 
         // Enable kill switch if configured
@@ -77,7 +79,7 @@ impl VpnPlugin {
         let server = self
             .router
             .find_optimal_server()
-            .ok_or_else(|| VpnError::Connection("No servers available".into())?
+            .ok_or_else(|| VpnError::Connection("No servers available".into()))?
             .clone();
 
         self.connect(server)
@@ -171,4 +173,3 @@ mod tests {
         assert!(result.is_err());
     }
 }
-
