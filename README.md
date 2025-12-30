@@ -1,13 +1,44 @@
 # Essentia VPN Plugin
 
-Quantum-safe VPN with neural routing for the Essentia ecosystem.
+Quantum-safe neural tunnels with PQC encryption for the Essentia platform.
 
 ## Features
 
-- **PQC Key Exchange**: ML-KEM/Kyber post-quantum key exchange
-- **Tunnel Management**: Secure VPN tunnel creation and management
-- **Neural Router**: AI-optimized routing decisions
-- **Traffic Encryption**: Full traffic encryption with PQC
+- Post-quantum cryptographic key exchange (ML-KEM)
+- Neural network-optimized routing
+- Consciousness-integrated traffic patterns
+- Multi-hop tunnel support
+- Kill switch and leak protection
+
+## FlexForge Integration
+
+The VPN plugin integrates with FlexForge via `VpnPluginFlexForge`:
+
+```ignore
+use essentia_vpn_plugin::flexforge::VpnPluginFlexForge;
+
+let plugin = VpnPluginFlexForge::new();
+let panel_info = plugin.panel_info();
+```
+
+## Architecture
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                       VPN Plugin                             │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │    PQC      │  │   Tunnel    │  │   Neural Router     │  │
+│  │  Key Mgmt   │  │   Manager   │  │                     │  │
+│  └──────┬──────┘  └──────┬──────┘  └──────────┬──────────┘  │
+│         │                │                     │             │
+│         ▼                ▼                     ▼             │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │              Secure Transport Layer                  │    │
+│  │        (essentia_pqc + essentia_net_plugin)          │    │
+│  └─────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## Usage
 
