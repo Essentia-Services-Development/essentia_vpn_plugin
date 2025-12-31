@@ -76,12 +76,13 @@ impl VpnPlugin {
 
     /// Connect to optimal server.
     pub fn connect_optimal(&mut self) -> VpnResult<()> {
-        let server = self
+        let server_rc = self
             .router
             .find_optimal_server()
             .ok_or_else(|| VpnError::Connection("No servers available".into()))?
             .clone();
 
+        let server = Rc::new((*server_rc).borrow().clone());
         self.connect(server)
     }
 

@@ -30,7 +30,7 @@ impl TunnelManager {
 
         self.active_tunnel = Some(VpnTunnel {
             id,
-            server,
+            server: (*server).clone(),
             state: TunnelState::Connecting,
             encryption: crate::types::EncryptionAlgorithm::Aes256GcmPqc,
             key_exchange: crate::types::KeyExchangeProtocol::HybridMlKem,
