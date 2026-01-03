@@ -3,11 +3,8 @@
 use std::rc::Rc;
 
 use crate::{
-    config::VpnConfig,
     errors::{VpnError, VpnResult},
-    key_exchange::PqcKeyExchange,
-    router::NeuralRouter,
-    tunnel::TunnelManager,
+    r#impl::{PqcKeyExchange, NeuralRouter, TunnelManager, VpnConfig},
     types::{TunnelState, VpnServer},
 };
 
@@ -22,6 +19,7 @@ pub struct VpnPlugin {
 
 impl VpnPlugin {
     /// Create a new VPN plugin.
+    #[must_use]
     pub fn new(config: VpnConfig) -> Self {
         Self {
             config,
@@ -33,11 +31,13 @@ impl VpnPlugin {
     }
 
     /// Get configuration.
+    #[must_use]
     pub fn config(&self) -> &VpnConfig {
         &self.config
     }
 
     /// Get router.
+    #[must_use]
     pub fn router(&self) -> &NeuralRouter {
         &self.router
     }
@@ -48,6 +48,10 @@ impl VpnPlugin {
     }
 
     /// Connect to a specific server.
+    ///
+    /// # Errors
+    ///
+    /// Returns `VpnError::Connection` if already connected or connection fails.
     pub fn connect(&mut self, server: Rc<VpnServer>) -> VpnResult<()> {
         if self.is_connected() {
             return Err(VpnError::Connection("Already connected".to_string()));
@@ -75,6 +79,10 @@ impl VpnPlugin {
     }
 
     /// Connect to optimal server.
+    ///
+    /// # Errors
+    ///
+    /// Returns `VpnError::Connection` if no servers available or connection fails.
     pub fn connect_optimal(&mut self) -> VpnResult<()> {
         let server_rc = self
             .router
@@ -86,7 +94,7 @@ impl VpnPlugin {
         self.connect(server)
     }
 
-    /// Disconnect.
+    /// Disconnect from current server.
     pub fn disconnect(&mut self) {
         self.tunnel_manager.close_tunnel();
 
@@ -103,11 +111,13 @@ impl VpnPlugin {
     }
 
     /// Check if connected.
+    #[must_use]
     pub fn is_connected(&self) -> bool {
         self.tunnel_manager.is_connected()
     }
 
     /// Get connection state.
+    #[must_use]
     pub fn state(&self) -> TunnelState {
         self.tunnel_manager
             .active_tunnel()
@@ -128,6 +138,7 @@ impl VpnPlugin {
     }
 
     /// Check if kill switch is active.
+    #[must_use]
     pub fn is_kill_switch_active(&self) -> bool {
         self.kill_switch_active
     }

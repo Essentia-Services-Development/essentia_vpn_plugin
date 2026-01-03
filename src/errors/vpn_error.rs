@@ -1,4 +1,4 @@
-//! VPN plugin error types.
+//! VPN error type definitions.
 
 use core::fmt;
 
@@ -31,6 +31,8 @@ impl fmt::Display for VpnError {
         }
     }
 }
+
+impl std::error::Error for VpnError {}
 
 /// Result type for VPN operations.
 pub type VpnResult<T> = Result<T, VpnError>;

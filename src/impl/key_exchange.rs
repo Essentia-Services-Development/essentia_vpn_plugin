@@ -14,16 +14,22 @@ pub struct PqcKeyExchange {
 
 impl PqcKeyExchange {
     /// Create a new key exchange handler.
+    #[must_use]
     pub fn new(protocol: KeyExchangeProtocol) -> Self {
         Self { protocol, public_key: None, shared_secret: None }
     }
 
     /// Get the key exchange protocol.
+    #[must_use]
     pub fn protocol(&self) -> KeyExchangeProtocol {
         self.protocol
     }
 
     /// Generate key pair.
+    ///
+    /// # Errors
+    ///
+    /// Returns `VpnError::KeyExchange` if key generation fails.
     pub fn generate_keypair(&mut self) -> VpnResult<Vec<u8>> {
         // In production, this would use essentia_pqc ML-KEM
         // Placeholder key generation
@@ -33,6 +39,10 @@ impl PqcKeyExchange {
     }
 
     /// Perform key encapsulation (client side).
+    ///
+    /// # Errors
+    ///
+    /// Returns `VpnError::KeyExchange` if encapsulation fails.
     pub fn encapsulate(&mut self, server_public_key: &[u8]) -> VpnResult<(Vec<u8>, Vec<u8>)> {
         if server_public_key.is_empty() {
             return Err(VpnError::KeyExchange("Empty server public key".to_string()));
@@ -47,6 +57,10 @@ impl PqcKeyExchange {
     }
 
     /// Perform key decapsulation (server side).
+    ///
+    /// # Errors
+    ///
+    /// Returns `VpnError::KeyExchange` if decapsulation fails.
     pub fn decapsulate(&mut self, ciphertext: &[u8]) -> VpnResult<Vec<u8>> {
         if ciphertext.is_empty() {
             return Err(VpnError::KeyExchange("Empty ciphertext".to_string()));
@@ -59,6 +73,7 @@ impl PqcKeyExchange {
     }
 
     /// Get shared secret.
+    #[must_use]
     pub fn shared_secret(&self) -> Option<&[u8]> {
         self.shared_secret.as_deref()
     }

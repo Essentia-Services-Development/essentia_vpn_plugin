@@ -1,4 +1,4 @@
-//! Neural network-optimized routing.
+//! Neural network-optimized routing implementation.
 
 use std::{cell::RefCell, rc::Rc};
 
@@ -11,6 +11,7 @@ pub struct NeuralRouter {
 
 impl NeuralRouter {
     /// Create a new neural router.
+    #[must_use]
     pub fn new() -> Self {
         Self { servers: Vec::new() }
     }
@@ -21,11 +22,13 @@ impl NeuralRouter {
     }
 
     /// Get all available servers.
+    #[must_use]
     pub fn servers(&self) -> &[Rc<RefCell<VpnServer>>] {
         &self.servers
     }
 
     /// Find best server for a given country.
+    #[must_use]
     pub fn find_best_server(&self, country: &str) -> Option<&Rc<RefCell<VpnServer>>> {
         self.servers
             .iter()
@@ -39,6 +42,7 @@ impl NeuralRouter {
     }
 
     /// Find best server overall (lowest load, PQC enabled).
+    #[must_use]
     pub fn find_optimal_server(&self) -> Option<&Rc<RefCell<VpnServer>>> {
         self.servers.iter().filter(|s| s.borrow().pqc_enabled).min_by(|a, b| {
             a.borrow()

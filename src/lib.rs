@@ -1,3 +1,15 @@
+//! Essentia VPN Plugin
+//!
+//! Post-quantum secure VPN implementation with neural routing.
+//!
+//! ## EMD Structure
+//!
+//! - `types/` - Core types (VpnServer, TunnelState, etc.)
+//! - `traits/` - Trait definitions (KeyExchange, Router, Tunnel)
+//! - `errors/` - Error types (VpnError, VpnResult)
+//! - `impl/` - Implementations (VpnConfig, VpnPlugin, etc.)
+//! - `flexforge.rs` - FlexForge UI integration
+
 // VPN plugin pedantic lint allowances (VPN-LINT-STAGING-01)
 #![allow(clippy::must_use_candidate)]
 #![allow(clippy::missing_errors_doc)]
@@ -38,25 +50,31 @@
 #![allow(clippy::manual_let_else)]
 #![allow(clippy::range_plus_one)]
 
-mod config;
-mod errors;
-pub mod flexforge;
-mod key_exchange;
-mod plugin;
-mod router;
-mod tunnel;
-mod types;
+// EMD Structure Modules
+pub mod errors;
+pub mod r#impl;
+pub mod traits;
+pub mod types;
 
-pub use config::VpnConfig;
+// FlexForge Integration (standalone module)
+pub mod flexforge;
+
+// Re-exports from errors/
 pub use errors::{VpnError, VpnResult};
-pub use flexforge::{ConnectionState, VpnPluginFlexForge, VpnUiConfig};
-pub use key_exchange::PqcKeyExchange;
-pub use plugin::VpnPlugin;
-pub use router::NeuralRouter;
-pub use tunnel::TunnelManager;
+
+// Re-exports from types/
 pub use types::{
     ConnectionStats, EncryptionAlgorithm, KeyExchangeProtocol, TunnelState, VpnServer, VpnTunnel,
 };
+
+// Re-exports from impl/
+pub use r#impl::{NeuralRouter, PqcKeyExchange, TunnelManager, VpnConfig, VpnPlugin};
+
+// Re-exports from traits/
+pub use traits::{TunnelProvider, VpnConnection};
+
+// Re-exports from flexforge
+pub use flexforge::{ConnectionState, VpnPluginFlexForge, VpnUiConfig};
 
 #[cfg(test)]
 mod tests {

@@ -1,10 +1,10 @@
-//! Tunnel management.
+//! Tunnel management implementation.
 
 use std::rc::Rc;
 
 use crate::{
     errors::{VpnError, VpnResult},
-    types::{ConnectionStats, TunnelState, VpnServer, VpnTunnel},
+    types::{ConnectionStats, EncryptionAlgorithm, KeyExchangeProtocol, TunnelState, VpnServer, VpnTunnel},
 };
 
 /// Tunnel manager for VPN connections.
@@ -15,11 +15,16 @@ pub struct TunnelManager {
 
 impl TunnelManager {
     /// Create a new tunnel manager.
+    #[must_use]
     pub fn new() -> Self {
         Self { active_tunnel: None, next_tunnel_id: 1 }
     }
 
     /// Create a tunnel to server.
+    ///
+    /// # Errors
+    ///
+    /// Returns `VpnError::Tunnel` if a tunnel is already active.
     pub fn create_tunnel(&mut self, server: Rc<VpnServer>) -> VpnResult<u64> {
         if self.active_tunnel.is_some() {
             return Err(VpnError::Tunnel("Tunnel already active".to_string()));
@@ -30,17 +35,18 @@ impl TunnelManager {
 
         self.active_tunnel = Some(VpnTunnel {
             id,
-            server: (*server).clone(),
-            state: TunnelState::Connecting,
-            encryption: crate::types::EncryptionAlgorithm::Aes256GcmPqc,
-            key_exchange: crate::types::KeyExchangeProtocol::HybridMlKem,
-            stats: ConnectionStats::default(),
+            server:       (*server).clone(),
+            state:        TunnelState::Connecting,
+            encryption:   EncryptionAlgorithm::Aes256GcmPqc,
+            key_exchange: KeyExchangeProtocol::HybridMlKem,
+            stats:        ConnectionStats::default(),
         });
 
         Ok(id)
     }
 
     /// Get active tunnel.
+    #[must_use]
     pub fn active_tunnel(&self) -> Option<&VpnTunnel> {
         self.active_tunnel.as_ref()
     }
@@ -61,11 +67,11 @@ impl TunnelManager {
     }
 
     /// Check if tunnel is connected.
+    #[must_use]
     pub fn is_connected(&self) -> bool {
         self.active_tunnel
             .as_ref()
-            .map(|t| t.state == TunnelState::Connected)
-            .unwrap_or(false)
+            .is_some_and(|t| t.state == TunnelState::Connected)
     }
 }
 

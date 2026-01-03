@@ -1,4 +1,4 @@
-//! VPN plugin type definitions.
+//! Core VPN type definitions.
 
 /// VPN server representation.
 #[derive(Debug, Clone)]
@@ -39,13 +39,20 @@ pub struct VpnTunnel {
 /// Tunnel state.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
 pub enum TunnelState {
+    /// Tunnel disconnected.
     #[default]
     Disconnected,
+    /// Tunnel connecting.
     Connecting,
+    /// Key exchange in progress.
     KeyExchange,
+    /// Tunnel connected.
     Connected,
+    /// Tunnel reconnecting.
     Reconnecting,
+    /// Tunnel disconnecting.
     Disconnecting,
+    /// Tunnel error.
     Error,
 }
 

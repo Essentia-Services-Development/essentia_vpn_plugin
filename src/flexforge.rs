@@ -401,13 +401,13 @@ mod tests {
 
         let stream_id = plugin
             .start_stream()
-            .ok_or_else(|| EssentiaError::invalid_state("Should start"))?;
+            .expect("Should start streaming");
         assert!(plugin.is_streaming());
         assert_eq!(plugin.target_fps(), 5);
 
         plugin
             .stop_stream(stream_id)
-            .ok_or_else(|| EssentiaError::invalid_state("Should stop"))?;
+            .expect("Should stop streaming");
         assert!(!plugin.is_streaming());
     }
 }
