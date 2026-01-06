@@ -4,7 +4,7 @@ use std::rc::Rc;
 
 use crate::{
     errors::{VpnError, VpnResult},
-    r#impl::{PqcKeyExchange, NeuralRouter, TunnelManager, VpnConfig},
+    r#impl::{NeuralRouter, PqcKeyExchange, TunnelManager, VpnConfig},
     types::{TunnelState, VpnServer},
 };
 
@@ -82,7 +82,8 @@ impl VpnPlugin {
     ///
     /// # Errors
     ///
-    /// Returns `VpnError::Connection` if no servers available or connection fails.
+    /// Returns `VpnError::Connection` if no servers available or connection
+    /// fails.
     pub fn connect_optimal(&mut self) -> VpnResult<()> {
         let server_rc = self
             .router

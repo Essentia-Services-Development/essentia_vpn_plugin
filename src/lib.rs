@@ -61,20 +61,16 @@ pub mod flexforge;
 
 // Re-exports from errors/
 pub use errors::{VpnError, VpnResult};
-
+// Re-exports from flexforge
+pub use flexforge::{ConnectionState, VpnPluginFlexForge, VpnUiConfig};
+// Re-exports from impl/
+pub use r#impl::{NeuralRouter, PqcKeyExchange, TunnelManager, VpnConfig, VpnPlugin};
+// Re-exports from traits/
+pub use traits::{TunnelProvider, VpnConnection};
 // Re-exports from types/
 pub use types::{
     ConnectionStats, EncryptionAlgorithm, KeyExchangeProtocol, TunnelState, VpnServer, VpnTunnel,
 };
-
-// Re-exports from impl/
-pub use r#impl::{NeuralRouter, PqcKeyExchange, TunnelManager, VpnConfig, VpnPlugin};
-
-// Re-exports from traits/
-pub use traits::{TunnelProvider, VpnConnection};
-
-// Re-exports from flexforge
-pub use flexforge::{ConnectionState, VpnPluginFlexForge, VpnUiConfig};
 
 #[cfg(test)]
 mod tests {

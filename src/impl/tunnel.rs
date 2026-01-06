@@ -4,7 +4,10 @@ use std::rc::Rc;
 
 use crate::{
     errors::{VpnError, VpnResult},
-    types::{ConnectionStats, EncryptionAlgorithm, KeyExchangeProtocol, TunnelState, VpnServer, VpnTunnel},
+    types::{
+        ConnectionStats, EncryptionAlgorithm, KeyExchangeProtocol, TunnelState, VpnServer,
+        VpnTunnel,
+    },
 };
 
 /// Tunnel manager for VPN connections.
@@ -35,11 +38,11 @@ impl TunnelManager {
 
         self.active_tunnel = Some(VpnTunnel {
             id,
-            server:       (*server).clone(),
-            state:        TunnelState::Connecting,
-            encryption:   EncryptionAlgorithm::Aes256GcmPqc,
+            server: (*server).clone(),
+            state: TunnelState::Connecting,
+            encryption: EncryptionAlgorithm::Aes256GcmPqc,
             key_exchange: KeyExchangeProtocol::HybridMlKem,
-            stats:        ConnectionStats::default(),
+            stats: ConnectionStats::default(),
         });
 
         Ok(id)
@@ -69,9 +72,7 @@ impl TunnelManager {
     /// Check if tunnel is connected.
     #[must_use]
     pub fn is_connected(&self) -> bool {
-        self.active_tunnel
-            .as_ref()
-            .is_some_and(|t| t.state == TunnelState::Connected)
+        self.active_tunnel.as_ref().is_some_and(|t| t.state == TunnelState::Connected)
     }
 }
 

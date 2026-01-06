@@ -399,15 +399,11 @@ mod tests {
     fn test_streaming() {
         let mut plugin = VpnPluginFlexForge::new();
 
-        let stream_id = plugin
-            .start_stream()
-            .expect("Should start streaming");
+        let stream_id = plugin.start_stream().expect("Should start streaming");
         assert!(plugin.is_streaming());
         assert_eq!(plugin.target_fps(), 5);
 
-        plugin
-            .stop_stream(stream_id)
-            .expect("Should stop streaming");
+        plugin.stop_stream(stream_id).expect("Should stop streaming");
         assert!(!plugin.is_streaming());
     }
 }
