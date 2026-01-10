@@ -23,3 +23,4 @@ essentia_net = { workspace = true }
 default = []
 [lib]
 path = "src/lib.rs"
+
