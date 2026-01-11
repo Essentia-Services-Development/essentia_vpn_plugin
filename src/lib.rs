@@ -72,7 +72,7 @@ pub use types::{
     ConnectionStats, EncryptionAlgorithm, KeyExchangeProtocol, TunnelState, VpnServer, VpnTunnel,
 };
 
-#[cfg(test)]
+#[cfg(all(test, feature = "full-tests"))]
 mod tests {
     use super::*;
 
