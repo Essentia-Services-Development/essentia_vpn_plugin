@@ -20,6 +20,7 @@ essentia_pqc = { workspace = true }
 essentia_net = { workspace = true }
 [dev-dependencies]
 [features]
+full-tests = []
 default = []
 [lib]
 path = "src/lib.rs"
