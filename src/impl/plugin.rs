@@ -85,11 +85,11 @@ impl VpnPlugin {
     /// Returns `VpnError::Connection` if no servers available or connection
     /// fails.
     pub fn connect_optimal(&mut self) -> VpnResult<()> {
-        let server_rc = self
-            .router
-            .find_optimal_server()
-            .ok_or_else(|| VpnError::Connection("No servers available".into()))?
-            .clone();
+        let server_rc = Rc::clone(
+            self.router
+                .find_optimal_server()
+                .ok_or_else(|| VpnError::Connection("No servers available".into()))?,
+        );
 
         let server = Rc::new((*server_rc).borrow().clone());
         self.connect(server)
@@ -186,5 +186,3 @@ mod tests {
         assert!(result.is_err());
     }
 }
-
-
