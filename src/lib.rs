@@ -82,3 +82,4 @@ mod tests {
         assert!(config.kill_switch);
     }
 }
+

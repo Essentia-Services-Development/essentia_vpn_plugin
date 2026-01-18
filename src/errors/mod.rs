@@ -5,3 +5,4 @@
 mod vpn_error;
 
 pub use vpn_error::{VpnError, VpnResult};
+

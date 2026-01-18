@@ -65,3 +65,4 @@ impl Default for NeuralRouter {
         Self::new()
     }
 }
+

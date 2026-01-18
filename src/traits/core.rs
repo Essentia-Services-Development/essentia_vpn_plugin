@@ -34,3 +34,4 @@ pub trait VpnConnection: Send + Sync {
     /// Gets the current connection state.
     fn connection_state(&self) -> TunnelState;
 }
+
