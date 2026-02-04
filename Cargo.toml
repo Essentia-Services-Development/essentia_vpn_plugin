@@ -1,0 +1,29 @@
+[package]
+name = "essentia_vpn_plugin"
+    repository        = { workspace = true }
+    readme            = { workspace = true }
+    keywords          = { workspace = true }
+    categories        = { workspace = true }
+description = "Quantum-safe neural tunnels with PQC encryption"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+# Core dependencies (workspace inheritance)
+essentia_core     = { workspace = true }
+essentia_traits     = { workspace = true }
+essentia_plugin_system     = { workspace = true }
+essentia_pqc     = { workspace = true }
+essentia_net     = { workspace = true }
+[dev-dependencies]
+[features]
+full-tests = []
+default = []
+[lib]
+path = "src/lib.rs"
+
+
+
