@@ -1,14 +1,5 @@
 //! Essentia VPN Plugin
-//!
-//! Post-quantum secure VPN implementation with neural routing.
-//!
-//! ## EMD Structure
-//!
-//! - `types/` - Core types (VpnServer, TunnelState, etc.)
-//! - `traits/` - Trait definitions (KeyExchange, Router, Tunnel)
-//! - `errors/` - Error types (VpnError, VpnResult)
-//! - `impl/` - Implementations (VpnConfig, VpnPlugin, etc.)
-//! - `flexforge.rs` - FlexForge UI integration
+
 
 // VPN plugin pedantic lint allowances (VPN-LINT-STAGING-01)
 #![allow(clippy::must_use_candidate)]
